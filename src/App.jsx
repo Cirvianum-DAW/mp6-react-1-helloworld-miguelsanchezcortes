@@ -19,7 +19,16 @@ function App() {
       : setGPlaces(updatedPlaces);
     console.log(tipusEstudiant)
   };
+  const [action, setAction] = useState('');
+  const [selectedItemId, setSelectedItemId] = useState('');
   const [detallsEstudiant, setDetallEstudiants] = useState([]);
+  const handleItemSelection = (action, selectedItemId) => {
+    setAction(action);
+    setSelectedItemId(selectedItemId);
+  };
+  const restaurarPlaces = (pgm) => {
+    pgm === 'Grau' ? setGPlaces(gPlaces + 1) : setNGPlaces(ngPlaces + 1);
+  };
   return (
     <div className="App flex h-screen flex-col items-center justify-center ">
       <div className="programes my-2">
@@ -65,10 +74,15 @@ function App() {
         setPlacesDisponibles={setPlacesDisponibles}
         placesActuals={tipusEstudiant === 'PostGrau' ? gPlaces : ngPlaces}
         setDetallsEstudiant={setDetallEstudiants}
+        handleItemSelection={handleItemSelection}
       />
       <StudentList
         detallsEstudiant={detallsEstudiant}
         setDetallsEstudiant={setDetallEstudiants}
+        action={action}
+        setAction={setAction}
+        selectedItemId={selectedItemId}
+        restaurarPlaces={restaurarPlaces}
       />
     </div>
   );

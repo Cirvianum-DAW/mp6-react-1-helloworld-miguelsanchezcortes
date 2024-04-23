@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { MdEdit, MdDelete } from 'react-icons/md';
 
 const Form = (props) => {
   const [firstName, setFirstName] = useState('');
@@ -17,6 +18,11 @@ const Form = (props) => {
       lname: lastName,
       programa: props.tipusEstudiantSelect,
       email: email,
+      edit: <MdEdit />,
+      delete: <MdDelete
+        className="hover:text-red-500"
+        onClick={() => props.handleItemSelection('delete', id)}
+      />,
     });
     event.preventDefault(); // Necessari per evitar que el form es refresqui
   };
@@ -32,6 +38,7 @@ const Form = (props) => {
     setLastName(lastName);
     setEmail(email);
   };
+
 
   return (
     <div className="flex h-screen justify-center">
